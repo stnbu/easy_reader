@@ -1,7 +1,6 @@
 var clickedEl = null;
 var isSelecting = false;
 
-var onmouseupBackup;
 var onclickBackup;
 
 //lắng nghe khi background.js gọi : khi click vào contextmenu
@@ -28,7 +27,7 @@ var onmouseout = function (event) {
     classie.removeClass(clickedEl, "highlight_fullscreen");
     return true;
 }
-var onmouseup = function (event) {
+var onmouseclick = function (event) {
     console.log(event);
     if (event.button == 0) {
         turonOffSelecting();
@@ -47,8 +46,7 @@ function turnOnSelecting() {
     //Backup lại sự
     onmouseupBackup = document.onmouseup;
     onclickBackup = document.body.onclick;
-    document.body.onmouseup = onmouseup;
-    document.body.onclick = function(){return false};
+    document.body.onclick = onmouseclick
 }
 
 //phục hồi
@@ -59,6 +57,5 @@ function turonOffSelecting() {
     }
     document.removeEventListener("mouseover", ononmouseover);
     document.removeEventListener("mouseout", onmouseout);
-    document.body.onmouseup = onmouseupBackup;
     document.body.onclick = onclickBackup;
 }
