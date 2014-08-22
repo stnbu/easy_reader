@@ -1,0 +1,26 @@
+{
+    "defaultTitle": {
+        "description": "Default title to display",
+        "message": "FullscreenChrome"
+    },
+    "extDesc": {
+        "description": "Extension description",
+        "message": "Fullscreen any element you want"
+    },
+    "extName": {
+        "description": "Extension name.",
+        "message": "Fullscreen Chrome"
+    },
+    "pageAction": {
+        "description": "String show on hover.",
+        "message": "Turn fullscreen on"
+    },
+    "selectElement": {
+        "description": "Context menu.",
+        "message": "Fullscreen - Ctrl+Shift+S"
+    },
+    "cancelSelection": {
+        "description": "String show on hover.",
+        "message": "Cancel selection"
+    }
+}
