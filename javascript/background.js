@@ -29,7 +29,7 @@ chrome.tabs.onUpdated.addListener(function (id, info, tab) {
 //Handle ẽự kiện khi click vào page action
 chrome.pageAction.onClicked.addListener(function (tab) {
     chrome.tabs.executeScript(tab.id, {code: "document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);"});
-})
+});
 
 //Handle message từ contextScript
 chrome.extension.onMessage.addListener(function (request, sender, sendResponse) {
@@ -46,7 +46,8 @@ chrome.contextMenus.onClicked.addListener(
         chrome.tabs.sendMessage(tab.id, {action: "beginselectElement"}, function (response) {
             updateContextMenu(response.isSelecting);
         });
-    });
+    }
+);
 
 //Nếu cài extension từ thư mục, thì mỗi khi thay đổi shortcut key phải delete extension ra khỏi chrome rồi add lại.
 chrome.commands.onCommand.addListener(function (command) {

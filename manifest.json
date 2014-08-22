@@ -1,10 +1,10 @@
 {
-    "background": {
-        "scripts": [
-            "javascript/background.js",
-            "javascript/analytics.js"
-        ]
-    },
+"background": {
+    "scripts": [
+        "javascript/background.js",
+        "javascript/analytics.js"
+    ]
+},
     "content_scripts": [
         {
             "matches": ["<all_urls>"],
@@ -17,27 +17,27 @@
 
         }
     ],
-    "page_action": {
-        "default_icon": "images/icon_19.png",
-        "default_title": "__MSG_pageAction__"
-    },
-    "commands": {
-        "beginselectElement": {
-            "suggested_key": {
-                "default": "Ctrl+Shift+S",
-                "windows": "Ctrl+Shift+S",
-                "mac": "Command+Shift+S"
-            },
-            "description": "Send a 'toggle-feature' event to the extension"
+"page_action": {
+    "default_icon": "images/icon_19.png",
+    "default_title": "__MSG_pageAction__"
+},
+"commands": {
+    "beginselectElement": {
+        "suggested_key": {
+            "default": "Ctrl+Shift+S",
+            "windows": "Ctrl+Shift+S",
+            "mac": "Command+Shift+S"
         },
-        "_execute_page_action": {
-            "suggested_key": {
-                "default": "Ctrl+Shift+F",
-                "windows": "Ctrl+Shift+F",
-                "mac": "Command+Shift+F"
-            }
-        }
+        "description": "Send a 'toggle-feature' event to the extension"
     },
+    "_execute_page_action": {
+        "suggested_key": {
+            "default": "Ctrl+Shift+F",
+            "windows": "Ctrl+Shift+F",
+            "mac": "Command+Shift+F"
+        }
+    }
+},
     "default_locale": "vi",
     "description": "__MSG_extDesc__",
     "icons": {
@@ -49,13 +49,13 @@
     },
     "manifest_version": 2,
     "name": "__MSG_extName__",
-    "permissions": [
-        "tabs",
-        "activeTab",
-        "contextMenus",
-        "http://*/*",
-        "https://*/*"
-    ],
+"permissions": [
+    "tabs",
+    "activeTab",
+    "contextMenus",
+    "http://*/*",
+    "https://*/*"
+],
     "content_security_policy": "script-src 'self' https://*.google-analytics.com; object-src 'self'",
     "version": "1.1.0"
 }
