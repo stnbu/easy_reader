@@ -1,18 +1,18 @@
 var clickedEl = null;
-var isSelecting = false;
+var isSelected = false;
 
 var onclickBackup;
 
 chrome.extension.onMessage.addListener(function (request, sender, sendResponse) {
     if (request.action == "beginselectElement") {
-        if (isSelecting == false) {
+        if (isSelected == false) {
             turnOnSelecting();
         }
         else {
             turnOffSelecting();
         }
     }
-    sendResponse({isSelecting: isSelecting});
+    sendResponse({isSelected: isSelected});
 });
 
 var ononmouseover = function (event) {
@@ -29,7 +29,7 @@ var onmouseclick = function (event) {
     console.log(event);
     if (event.button == 0) {
         turnOffSelecting();
-        chrome.runtime.sendMessage({action:"enterFullscreen",isSelecting: isSelecting}, function(response) {});
+        chrome.runtime.sendMessage({action:"enterFullscreen",isSelected: isSelected}, function(response) {});
         clickedEl.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
         clickedEl = null;
     }
@@ -37,7 +37,7 @@ var onmouseclick = function (event) {
 }
 
 function turnOnSelecting() {
-    isSelecting = true;
+    isSelected = true;
     document.addEventListener("mouseover", ononmouseover, false);
     document.addEventListener("mouseout", onmouseout, false);
     onmouseupBackup = document.onmouseup;
@@ -46,7 +46,7 @@ function turnOnSelecting() {
 }
 
 function turnOffSelecting() {
-    isSelecting = false;
+    isSelected = false;
     if (clickedEl) {
         classie.removeClass(clickedEl, "highlight_fullscreen");
     }

@@ -5,13 +5,13 @@ var pageContext = chrome.contextMenus.create({
     }
 );
 
-var updateContextMenu = function (isSelecting) {
-    if (isSelecting == true) {
+var updateContextMenu = function (isSelected) {
+    if (isSelected == true) {
         chrome.contextMenus.update(pageContext, {
             "title": chrome.i18n.getMessage('cancelSelection')
         });
     }
-    else if (isSelecting == false) {
+    else if (isSelected == false) {
         chrome.contextMenus.update(pageContext, {
             "title": chrome.i18n.getMessage('selectElement')
         });
@@ -29,8 +29,8 @@ chrome.pageAction.onClicked.addListener(function (tab) {
 
 chrome.extension.onMessage.addListener(function (request, sender, sendResponse) {
     if (request.action == "enterFullscreen") {
-        console.log(request.isSelecting);
-        updateContextMenu(request.isSelecting);
+        console.log(request.isSelected);
+        updateContextMenu(request.isSelected);
     }
     sendResponse({});
 });
@@ -38,7 +38,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
 chrome.contextMenus.onClicked.addListener(
     function (info, tab) {
         chrome.tabs.sendMessage(tab.id, {action: "beginselectElement"}, function (response) {
-            updateContextMenu(response.isSelecting);
+            updateContextMenu(response.isSelected);
         });
     }
 );
@@ -52,7 +52,7 @@ chrome.commands.onCommand.addListener(function (command) {
         }, function (tabs) {
             var tab = tabs[0];
             chrome.tabs.sendMessage(tab.id, "beginselectElement", function (response) {
-                updateContextMenu(response.isSelecting);
+                updateContextMenu(response.isSelected);
             });
         });
 
