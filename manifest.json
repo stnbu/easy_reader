@@ -1,8 +1,7 @@
 {
 "background": {
     "scripts": [
-        "javascript/background.js",
-        "javascript/analytics.js"
+        "javascript/background.js"
     ]
 },
     "content_scripts": [

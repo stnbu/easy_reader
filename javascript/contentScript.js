@@ -3,20 +3,18 @@ var isSelecting = false;
 
 var onclickBackup;
 
-//lắng nghe khi background.js gọi : khi click vào contextmenu
 chrome.extension.onMessage.addListener(function (request, sender, sendResponse) {
     if (request.action == "beginselectElement") {
         if (isSelecting == false) {
             turnOnSelecting();
         }
         else {
-            turonOffSelecting();
+            turnOffSelecting();
         }
     }
     sendResponse({isSelecting: isSelecting});
 });
 
-//các hàm xử lý sự kiện chuột
 var ononmouseover = function (event) {
     clickedEl = event.target;
     classie.addClass(clickedEl, "highlight_fullscreen");
@@ -30,7 +28,7 @@ var onmouseout = function (event) {
 var onmouseclick = function (event) {
     console.log(event);
     if (event.button == 0) {
-        turonOffSelecting();
+        turnOffSelecting();
         chrome.runtime.sendMessage({action:"enterFullscreen",isSelecting: isSelecting}, function(response) {});
         clickedEl.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
         clickedEl = null;
@@ -38,19 +36,16 @@ var onmouseclick = function (event) {
     return false;
 }
 
-//Handle các listener
 function turnOnSelecting() {
     isSelecting = true;
     document.addEventListener("mouseover", ononmouseover, false);
     document.addEventListener("mouseout", onmouseout, false);
-    //Backup lại sự
     onmouseupBackup = document.onmouseup;
     onclickBackup = document.body.onclick;
     document.body.onclick = onmouseclick
 }
 
-//phục hồi
-function turonOffSelecting() {
+function turnOffSelecting() {
     isSelecting = false;
     if (clickedEl) {
         classie.removeClass(clickedEl, "highlight_fullscreen");
